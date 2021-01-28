@@ -1,0 +1,33 @@
+import {GET_LEADS, ADD_LEAD, DELETE_LEADS, GET_ERRORS} from '../actions/types';
+import { createMessage } from '../actions/message';
+
+let initialState = {
+    leads: []
+}
+
+let leads = (state = initialState, action) => {
+    switch (action.type){
+        case GET_LEADS:
+            return {
+                ...state,
+                leads: action.payload // promise 
+            }
+
+        case ADD_LEAD:
+            return {
+                ...state,
+                leads: [...state.leads, action.payload] 
+            }
+
+        case DELETE_LEADS:
+            return {
+                ...state,
+                leads: state.leads.filter(lead => lead.id !== action.payload) // payload here is the id of lead
+            }
+
+        default:
+            return state;
+    }
+}
+
+export default leads;
